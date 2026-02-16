@@ -1,0 +1,44 @@
+{
+  "targets": [
+    {
+      "name": "stm32-g031",
+      "setup_cmd": "sudo apt-get update && sudo apt-get install -y gcc-arm-none-eabi libnewlib-arm-none-eabi",
+      "build_script": "make -C tutorials/stm32/nucleo-g031-make-baremetal-builtin build",
+      "elf": "tutorials/stm32/nucleo-g031-make-baremetal-builtin/firmware.elf",
+      "ld": "tutorials/stm32/nucleo-g031-make-baremetal-builtin/link.ld",
+      "linker_vars": ""
+    },
+    {
+      "name": "stm32-f429-rndis",
+      "setup_cmd": "sudo apt-get update && sudo apt-get install -y gcc-arm-none-eabi libnewlib-arm-none-eabi",
+      "build_script": "make -C tutorials/stm32/nucleo-f429zi-make-baremetal-builtin-rndis build",
+      "elf": "tutorials/stm32/nucleo-f429zi-make-baremetal-builtin-rndis/firmware.elf",
+      "ld": "tutorials/stm32/nucleo-f429zi-make-baremetal-builtin-rndis/link.ld",
+      "linker_vars": ""
+    },
+    {
+      "name": "stm32-f746-rndis",
+      "setup_cmd": "sudo apt-get update && sudo apt-get install -y gcc-arm-none-eabi libnewlib-arm-none-eabi",
+      "build_script": "make -C tutorials/stm32/nucleo-f746zg-make-baremetal-builtin-rndis build",
+      "elf": "tutorials/stm32/nucleo-f746zg-make-baremetal-builtin-rndis/firmware.elf",
+      "ld": "tutorials/stm32/nucleo-f746zg-make-baremetal-builtin-rndis/link.ld",
+      "linker_vars": ""
+    },
+    {
+      "name": "renesas-ra6m4",
+      "setup_cmd": "sudo apt-get update && sudo apt-get install -y gcc-arm-none-eabi libnewlib-arm-none-eabi",
+      "build_script": "make -C tutorials/renesas/ek-ra6m4-make-baremetal-builtin build",
+      "elf": "tutorials/renesas/ek-ra6m4-make-baremetal-builtin/firmware.elf",
+      "ld": "tutorials/renesas/ek-ra6m4-make-baremetal-builtin/link.ld",
+      "linker_vars": ""
+    },
+    {
+      "name": "ti-tm4c1294xl-rndis",
+      "setup_cmd": "sudo apt-get update && sudo apt-get install -y gcc-arm-none-eabi libnewlib-arm-none-eabi",
+      "build_script": "make -C tutorials/ti/ek-tm4c1294xl-make-baremetal-builtin-rndis build",
+      "elf": "tutorials/ti/ek-tm4c1294xl-make-baremetal-builtin-rndis/firmware.elf",
+      "ld": "tutorials/ti/ek-tm4c1294xl-make-baremetal-builtin-rndis/link.ld",
+      "linker_vars": ""
+    }
+  ]
+}

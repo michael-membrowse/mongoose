@@ -1,0 +1,52 @@
+name: Onboard to MemBrowse
+
+on:
+  workflow_dispatch:
+    inputs:
+      num_commits:
+        description: 'Number of commits to process'
+        required: true
+        default: '10'
+        type: string
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    outputs:
+      targets: ${{ steps.set-matrix.outputs.targets }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Load target matrix
+        id: set-matrix
+        run: echo "targets=$(jq -c '.targets' .github/membrowse-targets.json)" >> $GITHUB_OUTPUT
+
+  onboard:
+    needs: setup
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        target: ${{ fromJson(needs.setup.outputs.targets) }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Install packages
+        run: ${{ matrix.target.setup_cmd }}
+
+      - name: Run MemBrowse Onboard Action
+        uses: membrowse/membrowse-action/onboard-action@v1
+        with:
+          target_name: ${{ matrix.target.name }}
+          num_commits: ${{ github.event.inputs.num_commits }}
+          build_script: ${{ matrix.target.build_script }}
+          elf: ${{ matrix.target.elf }}
+          ld: ${{ matrix.target.ld }}
+          linker_vars: ${{ matrix.target.linker_vars }}
+          api_key: ${{ secrets.MEMBROWSE_API_KEY }}
+          binary_search: true
